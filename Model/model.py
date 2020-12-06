@@ -27,9 +27,9 @@ class LSTMModel(torch.nn.Module):
         if embedding_dim != self.total_hidden:
             self.linear_proj = torch.nn.Linear(embedding_dim, self.total_hidden)
         self.relu = torch.nn.ReLU()
-        self.LN2 = torch.nn.LayerNorm(hidden_units)
+        self.LN2 = torch.nn.LayerNorm(self.total_hidden)
         self.D2 = torch.nn.Dropout(dropout)
-        self.Decoder = torch.nn.Linear(hidden_units*2 if bidirectional else hidden_units, vocab_size)
+        self.Decoder = torch.nn.Linear(self.total_hidden, vocab_size)
 
     def forward(self, sequence, hiddens_states):
         x_embedded = self.Embedding(sequence)
