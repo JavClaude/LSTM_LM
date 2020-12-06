@@ -12,9 +12,10 @@ def generate_sequence(model, tokenizer, seed: str, max_length: int):
     output = input
     input = torch.tensor([input], dtype=torch.long, device=device)
 
+    hiddens = model.init_hiddens(1)
+
     for _ in range(max_length):
         with torch.no_grad():
-            hiddens = model.init_hiddens(1)
 
             logits, hiddens = model(
                 input,
