@@ -28,5 +28,7 @@ def generate_sequence(model, tokenizer, seed: str, max_length: int):
             )
 
             input = top.unsqueeze(0)
-            
+
+            output.append(input.item())
+
     return output
